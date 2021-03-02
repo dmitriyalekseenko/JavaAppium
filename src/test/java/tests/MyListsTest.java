@@ -9,6 +9,9 @@ import org.junit.Test;
 public class MyListsTest extends CoreTestCase
 {
     private static final  String name_of_folder = "Learning programming";
+    private static final String
+    login = "Timons1",
+    password = "testaccaunt1";
 
     @Test
     public void testSaveFirstArticleToMyList() throws InterruptedException {
@@ -16,7 +19,7 @@ public class MyListsTest extends CoreTestCase
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
@@ -29,6 +32,22 @@ public class MyListsTest extends CoreTestCase
         } else {
             ArticlePageObject.addArticleToMySaved();
         }
+
+
+        if (Platform.getInstance().isMW()) {
+            AuthorizationPageObject Auth = new AuthorizationPageObject(driver);
+            Auth.clickAuthButton();
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+
+            ArticlePageObject.waitForTitleElement();  //ждем, когда нас средиректит обратно на страницу после авторизации
+
+            assertEquals("We are not on the same page after login",
+                    article_title,
+                    ArticlePageObject.getArticleTitle()
+            );
+            ArticlePageObject.addArticleToMySaved();
+        }
         ArticlePageObject.closeArticle();
 
         if (Platform.getInstance().isIOS()) {
@@ -38,6 +57,7 @@ public class MyListsTest extends CoreTestCase
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
 
+        NavigationUI.openNavigation();
         NavigationUI.clickMyLists();
 
         if (Platform.getInstance().isIOS()) {

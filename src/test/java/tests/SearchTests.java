@@ -16,7 +16,7 @@ public class SearchTests extends CoreTestCase
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.waitForSearchResult("Object-oriented programming language");
+        SearchPageObject.waitForSearchResult("bject-oriented programming language");
     }
 
     @Test
@@ -54,7 +54,7 @@ public class SearchTests extends CoreTestCase
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.waitForSearchResult("Java");
         SearchPageObject.clickCancelSearch();
-        SearchPageObject.waitForSearchElementNotPresent("Object-oriented programming language");
+        SearchPageObject.waitForSearchElementNotPresent("bject-oriented programming language");
 
     }
 
@@ -95,7 +95,7 @@ public class SearchTests extends CoreTestCase
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
 
@@ -110,7 +110,7 @@ public class SearchTests extends CoreTestCase
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
+        SearchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "bject-oriented programming language");
         int amount_of_search_result = SearchPageObject.getAmountOfFoundArticles();
 
         assertTrue(
